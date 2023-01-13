@@ -1,0 +1,25 @@
+// gradle : 버전관리와 라이브러리 당겨오는 역할. 약간 node의 package.json같은 느낌
+
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.0.1' // 처음에 선택한 스프링 버전
+	id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'hello'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17' // 자바17
+
+repositories {
+	mavenCentral() // 아래의 라이브러리를 다운로드 하는 공개된 사이트를 간편하게 설정함
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' // html만드는 템플릿 엔진
+	implementation 'org.springframework.boot:spring-boot-starter-web' // 웹 템플릿
+	testImplementation 'org.springframework.boot:spring-boot-starter-test' // 테스트용 라이브러리?
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
