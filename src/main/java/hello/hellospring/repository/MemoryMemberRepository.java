@@ -1,6 +1,7 @@
 package hello.hellospring.repository;
 
 import hello.hellospring.domain.Member;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
@@ -9,6 +10,7 @@ import java.util.*;
  * 회원 리포지토리 메모리 구현체
  * 동시성 문제가 고려되어 있지 않음, 실무에서는 ConcurrentHashMap, AtomicLong 사용 해야한다
  */
+@Repository
 public class MemoryMemberRepository implements MemberRepository{
 
     private static Map<Long, Member> store = new HashMap<>();
@@ -34,12 +36,18 @@ public class MemoryMemberRepository implements MemberRepository{
                 .findAny(); // 그중에 찾으면 Optional로 반환한다. 없으면 optional에 null이 포함되서 반환된다
     }
 
+    /**
+     * Member List를 형성하여 리턴한다.
+     */
     @Override
-    public List<Member> findAll() { // 저장소는 map인데 반환은 List라서
-        return new ArrayList<>(store.values()); // 결국 values인 member들이 리스트를 형성하게 된다
+    public List<Member> findAll() {
+        return new ArrayList<>(store.values());
     }
 
-    // 테스토용?
+    /**
+     * 테스트에서 쓰인다.
+     * 각 테스트마다 메모리를 비워서 테스트들을 메모리 독립적으로 만들어준다
+     */
     public void clearStore() {
         store.clear();
     }

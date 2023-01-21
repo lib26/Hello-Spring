@@ -15,7 +15,8 @@ class MemberServiceTest {
 
     /**
      * 동작하기 전단계 마다 행한다.
-     * 각 테스트는 독립적이여야한다. 순서에 영향을 받으면 안된다
+     * 각 테스트는 독립적이여야한다. 순서에 영향을 받으면 안된다.
+     * 여기서는 개발자가 직접 의존성 주입을 해주었다.
      */
     @BeforeEach
     public void beforeEach() {
