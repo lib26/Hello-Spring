@@ -36,6 +36,7 @@ public class HelloController {
         return "hello " + name; // 이 데이터가 body부분에 저장되어 html(view)이 아닌 문자열 자체가 리턴된다
     }
 
+
     // 4
     // @ResponseBody 를 사용하고, 객체를 반환하면 객체가 JSON으로 변환된다. API 방식
     @GetMapping("hello-api") // http://localhost:8080/hello-api?name=인범인범
