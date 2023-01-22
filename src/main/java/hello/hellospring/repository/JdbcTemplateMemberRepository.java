@@ -20,10 +20,9 @@ public class JdbcTemplateMemberRepository implements MemberRepository {
 
     /**
      * DI
-     *
-     * @Autowired 생성자가 하나면 생략가능하다
      * 스프링이 자동으로 dataSource Injection 함
      */
+    @Autowired // 생성자가 하나면 생략가능하다
     public JdbcTemplateMemberRepository(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
@@ -32,10 +31,11 @@ public class JdbcTemplateMemberRepository implements MemberRepository {
     public Member save(Member member) {
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
         jdbcInsert.withTableName("member").usingGeneratedKeyColumns("id");
+
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("name", member.getName());
-        Number key = jdbcInsert.executeAndReturnKey(new
-                MapSqlParameterSource(parameters));
+
+        Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
         member.setId(key.longValue());
         return member;
     }
